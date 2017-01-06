@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Node.js</title>
+
+		<meta name="author" content="Cesar Daniel Perez">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/night.css" id="theme">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<div class="slides">
+
+				<section data-background="img/banner_big.png"></section>
+
+                <section>
+                    <h1>Node.js</h1>
+                    <h3>An introduction for java developers</h3>
+                    <p>
+                        <small>Created by <a href="https://github.com/cesdperez">César Daniel Pérez</a></small>
+                    </p>
+                </section>
+
+                <section data-markdown>
+                    <script type="text/template">
+                        ## Agenda
+                        
+                        * What is Node.js?
+                        * Java vs Node.js architectural comparison
+                        * Multithreaded blocking vs Singlethreaded non-blocking
+                        * Code example
+                        * Node.js package manager
+                    </script>
+                </section>
+
+                <section data-markdown>
+                    <script type="text/template">
+                        ## What is Node.js?
+                        
+                        * Is it a language?
+                        * Is it a library?
+                        * Is it a framework?
+                        * "It's javascript on the server"?
+                    </script>
+                </section>
+
+                <section>
+                    <h4>In order to build a proper definition, let's see how a Node.js ecosystem compares to a Java ecosystem</p>
+                </section>
+
+                <section>
+					<section>
+						<h3>Java code execution lifecycle</h3>
+						<img height=550 data-src="https://dzone.com/storage/temp/3742199-nodejs-jre-1.jpg">
+					</section>
+					<section>
+						<h3>Java webapp typical architecture</h3>
+						<img height=550 data-src="https://dzone.com/storage/temp/3742283-javaapparch.png">
+					</section>
+					<section>
+						<h3>Java webapp typical deployment</h3>
+						<img height=550 data-src="https://dzone.com/storage/temp/3742331-javadeployarch.png">
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h3>Node.js code execution lifecycle</h3>
+						<img height=550 data-src="https://dzone.com/storage/temp/3742236-nodejs-jre-2.jpg">
+					</section>
+					<section>
+						<h3>Node.js webapp typical architecture</h3>
+						<img height=550 data-src="https://dzone.com/storage/temp/3742301-nodejsapparch.png">
+					</section>
+					<section>
+						<h3>Node.js webapp typical deployment</h3>
+						<img height=550 data-src="https://dzone.com/storage/temp/3742332-nodejsdeployarch.png">
+					</section>
+				</section>
+
+				<section>	
+					<section>
+						<q cite="https://nodejs.org/en/"><b>Node.js® is a JavaScript runtime</b> built on <a href="https://developers.google.com/v8/">Chrome's V8 JavaScript engine</a>. Node.js uses an event-driven, 	non-blocking I/O model that makes it lightweight and efficient. Node.js' package ecosystem, npm, is the largest ecosystem of open source libraries in the world.</q>
+						<p><a href="https://nodejs.org/en/">Node.js site</a></p>
+					</section>
+					<section>
+						<h3>Node.js architecture<h3>
+						<img data-src="https://i.stack.imgur.com/u1O2O.png">
+					</section>
+				</section>
+
+
+				<section data-markdown>
+                    <script type="text/template">
+                        ## Agenda
+                        
+                        * ~~What is Node.js?~~
+                        * ~~Java vs Node.js architectural comparison~~
+                        * Multithreaded blocking vs Singlethreaded non-blocking
+                        * Code example
+                        * Node.js package manager
+                    </script>
+                </section>
+
+                <section>
+
+					<section>
+						<h3>Multithreaded blocking client-server architecture</h3>
+						<img height=550 data-src="https://4.bp.blogspot.com/-sk-f4rcsD5o/V-KhQ4J8cWI/AAAAAAAACpA/5VXY1N-Djh4HmlJxTG2l2ZhFo3RFRypqwCLcB/s640/sD7ncrJznpx4S284ScYifrA.png">
+					</section>
+
+					<section>
+						<h3>Single-threaded non-blocking client-server architecture</h3>
+						<img height=550 data-src="https://4.bp.blogspot.com/-LFUyZRH5_n8/V-KhcNlXQYI/AAAAAAAACpE/5lKhdTb0EOQRtKPewZQEHuSwXgLOq4hUwCLcB/s1600/smX2GaYGfJuuIl9UHlh5ceA.png">
+					</section>
+
+					<section>
+						<h2>Trade-offs</h2>
+						<table>
+							<thead>
+								<tr>
+									<th>Multithreaded blocking</th>
+									<th>Singlethreaded non-blocking</th>
+								<tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Scales vertically </td>
+									<td>Scales horizontally</td>
+								</tr>
+								<tr>
+									<td>More threads, more active connections, more resources</td>
+									<td>Less resources, connections are cheap</td>
+								</tr>
+								<tr>
+									<td>More context switches, more use of CPU caches</td>
+									<td>Intermediate data stays allways on the same CPU. More efficent</td>
+								</tr>
+								<tr>
+									<td>Easier to debug</td>
+									<td>Harder to follow code throughout callbacks and different threads</td>
+								</tr>
+							</tbody>
+						</table>
+					</section>	
+
+					<section>
+						<p>Apples-to-apples comparison of both models:</p>
+						<p><a href="http://techblog.netflix.com/2016/09/zuul-2-netflix-journey-to-asynchronous.html">Zuul 2 : The Netflix Journey to Asynchronous, Non-Blocking Systems</a></p>
+					</section>
+
+				</section>
+
+				<section>
+                    <section>
+						<p>A typical Java webapp follows the <i>multithreaded blocking</i> model while Node.js was born to follow the <i>singlethreaded non-blocking</i> model inherently.</p>
+						<p>The <b>Reactive</b> programming paradigm that has been getting popular in recent years, is the Node-way since the beginning.</p>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+							### What if I want to implement a singlethreaded non-blocking model with Java?</h2>
+							It wasn't easy to come with similar alternatives in the Java ecosystem, the Java Servlet API is multithreaded blocking by nature.
+						
+							Java libraries for reactive I/O streams:
+							* [RxJava](http://reactivex.io/)
+							* [Reactor](https://projectreactor.io/)
+							* [Akka](http://akka.io/)
+
+							Frameworks:
+							* [Netty](http://netty.io/)
+							* Spring Reactive ([overview](https://www.youtube.com/watch?v=rdgJ8fOxJhc))
+						</script>
+					</section>
+				</section>
+
+				<section>
+
+					<section>
+                    	<h1>ENOUGH. WANNA SEE SOME CODE</h1>
+					</section>
+
+					<section>
+						<h2>Filtered ls</h2>
+                    	<pre><code class="hljs">
+//load modules
+var fs = require('fs')
+var path = require('path')
+
+//read arguments
+var folder = process.argv[2]
+var ext = '.' + process.argv[3]
+
+//callback example
+fs.readdir(folder, function (err, files) {
+  //error treatment
+  if (err) return console.error(err)
+
+  //another callback
+  files.forEach(function (file) {
+    if (path.extname(file) === ext) {
+      console.log(file)
+    }
+  })
+})
+                    	</code></pre>
+                    	<p>Prints a list of files in a given directory, filtering by extension</p>
+					</section>
+					
+				</section>
+
+				<section data-markdown>
+                    <script type="text/template">
+                        ## Agenda
+                        
+                        * ~~What is Node.js?~~
+                        * ~~Java vs Node.js architectural comparison~~
+                        * ~~Multithreadedblocking vs Singlethreaded non-blocking~~
+                        * ~~Code example~~
+                        * Node.js package manager
+                    </script>
+                </section>
+
+                <section>
+                	<section data-markdown>
+                    	<script type="text/template">
+                        ## npm
+                        
+                        * The default package manager for Node.js
+                        * It's written entirely in javascript
+                        * Allows user to consume and distribute Node.js packages.
+                        * A **package** is a file or directory that is described by a **package.json**
+                        * A **module** is any file or directory that can be loaded by Node.js' *require()*
+
+                        *check out [npm documentation](https://docs.npmjs.com/)*
+                    	</script>
+                	</section>
+                	<section data-markdown>
+                    	<script type="text/template">
+                        ## package.json
+
+                        *check out [package.json interactive guide](http://browsenpm.org/package.json)*
+                    	</script>
+                	</section>
+                	<section>
+                    	<img data-src="img/module-counts.png"/>
+                    	<a href="wwww.modulecounts.com">modulecounts.com</a>
+					</section>
+				</section>
+
+				<section data-background="http://i.giphy.com/l0HlUG5M4pNZ0X42I.gif">
+                	<h1>QUESTIONS</h1>
+				</section>
+
+				<section>
+                	<section>
+                		<h1>WHAT'S NEXT?</h1>
+                	</section>
+                	<section data-background="https://media.giphy.com/media/2jg9inCU6MMCI/source.gif">
+                		<h1>POCHE SESSIONS</h1>
+                		<h3>Building a Slack bot with Node.js</h3>
+                	</section>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
