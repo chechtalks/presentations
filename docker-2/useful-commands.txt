@@ -1,0 +1,98 @@
+# Get help
+docker --help
+man docker
+man dockerfile
+
+# Get help for an specific dockers command
+docker command --help
+
+# List all the images
+docker images
+
+docker images -aq --no-trunc # Display the long images ids for all the images stored locally
+
+# Run a new container from an image
+docker run imageId:tag # if tag is not specified, latest will be used
+
+docker run imageId:tag command # Run a command from an image in a new container
+docker run -it imageId /bin/bash # Run an interactive container with tty
+docker run --name container_name imageId # Give a name to the container being created
+docker run --rm imageId # Remove the container when execution done
+docker run -P imageId # Expose all the containers open ports
+docker run -p hostPort:containersPort imageId # Expose only the specified port mapped to a host port
+docker run -v /volume_name imageId # Create a volume inside de container
+docker run -v /host_folder:/volume imageId # Bind a host folder into a volume on the container
+docker run  --volumes-from source_containerId imageId # Share volumes between continers
+docker run -d imageId # Runs a container in background (detach mode)
+docker run --link source_container imageId # Add a link to another container
+
+# Remove containers
+docker rm containerId
+
+docker rm $(docker ps -aq) # Remove all the containers
+
+# Remove images
+docker rmi imageId
+
+docker rmi $(docker images -aq) # Remove all the local containers
+
+# List the running containers
+docker ps
+
+# List all the containers (running and not running)
+docker ps -a
+
+# Start and stop a container
+docker start containerId
+docker stop containerId
+
+# Execute a command on a running container
+docker exec containerId command
+
+docker exec -it containerId command # Execute a command on a running container in interactive mode with tty
+
+# Inspect an image
+docker inspect imageId
+
+# Instpect a container
+docker inspect containerId
+
+# Look at a containers logs
+docker logs containerid
+
+# Look at a containers logs with tails
+docker logs -f containerid
+
+# Create a new image with the commit command
+docker commit containerid repo_name/image_name:tag
+
+# Build an image from a Dockerfile
+docker build -t repo_name/image_name:version .
+
+docker build -t --file My_Dockerfile repo_name/image_name:version . # Build an image with a specific dockerfile
+
+# Dockerfile Example
+FROM ubuntu:14.04
+RUN apt-get update && \
+    apt-get install -y nginx
+
+EXPOSE 80 443
+
+CMD ["nginx","-g","daemon off;"]
+#
+
+# Change the tag of an image
+docker tag imageid repo/new_imageid:tag
+
+# Push an image to a repo
+docker push repo/imagesid:tag
+
+# Pull an image from a repo
+docker pull repo/imageid:tag
+
+#Log to docker hub
+docker login
+
+docker login -u username -p password
+
+Fuente: https://docs.docker.com/
